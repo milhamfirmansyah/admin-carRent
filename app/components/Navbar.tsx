@@ -4,7 +4,7 @@ import { MagnifyingGlassIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 
 function Navbar() {
   return (
-    <div className="pl-[94px] pr-6 py-[18px] flex justify-between items-center bg-[#fff] shadow-sm fixed top-0 right-0 left-0">
+    <div className="pl-[94px] pr-6 py-[18px] flex justify-between items-center bg-[#fff] shadow-sm fixed top-0 right-0 left-0 z-10">
       <div className="w-[100px] h-[34px] bg-[#CFD4ED]"></div>
       <div className="flex items-center gap-6">
         <div className="flex">
