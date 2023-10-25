@@ -1,7 +1,8 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { ChevronRightIcon, UsersIcon, ClockIcon, TrashIcon,PencilSquareIcon } from '@heroicons/react/24/outline';
+import { ChevronRightIcon, UsersIcon, ClockIcon, TrashIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 import axios from 'axios';
+import Modal from './Modal';
 
 interface CarsData {
   id: number;
@@ -18,6 +19,9 @@ interface CarsData {
 
 function ListCar() {
   const [data, setData] = useState<CarsData[]>([]);
+  const [isShown, setIsShown] = useState(false);
+  const [name, setName] = useState('');
+  const [modalId, setModalId] = useState(0);
 
   const getData = async () => {
     const res = await axios.get(`https://api-car-rental.binaracademy.org/admin/v2/car`, {
@@ -31,10 +35,34 @@ function ListCar() {
   useEffect(() => {
     getData();
   }, []);
-  console.log(data);
+  // console.log(data);
+
+  // Delete Car
+  const handleModal = (name: string, id: number) => {
+    setIsShown(true);
+    setName(name);
+    setModalId(id)
+  };
+
+  const handleCancel = () => {
+    setIsShown(false);
+  };
+
+  const handleDelete = async(id: number) => {
+    const res = await axios.delete(`https://api-car-rental.binaracademy.org/admin/car/${id}`, {
+      headers: {
+        access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGJjci5pbyIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY2NTI0MjUwOX0.ZTx8L1MqJ4Az8KzoeYU2S614EQPnqk6Owv03PUSnkzc',
+      },
+    });
+    setIsShown(false);
+    location.reload()
+    console.log(res)
+  };
 
   return (
     <div className="pt-[102px] pl-[245px] pr-[25px]">
+      {isShown && <Modal name={name} cancel={handleCancel} id={modalId} del={handleDelete}/>}
+      {isShown && <div className="fixed top-0 left-0 right-0 bottom-0 z-10 bg-black bg-opacity-60"></div>}
       <div className="flex gap-1 items-center mb-[27px]">
         <h1 className="text-xs font-bold">Cars</h1>
         <ChevronRightIcon className="w-4 h-4" />
@@ -55,20 +83,25 @@ function ListCar() {
       <div className="flex flex-wrap gap-6 justify-center items-center">
         {data.map((item) => (
           <div className="w-[315px] h-[460px] p-6 bg-[#fff]">
-            <img src={item.image} alt="car" className="mb-[47px]" />
-            <p className='text-sm mb-2'>{item.name}</p>
-            <p className='text-base font-bold mb-4'>Rp. {item.price} / hari</p>
+            <img src={item.image} alt="car" className="mb-[47px] h-[150px] w-full" />
+            <p className="text-sm mb-2">{item.name}</p>
+            <p className="text-base font-bold mb-4">Rp. {item.price} / hari</p>
             <div className="flex items-center gap-2 mb-4">
               <UsersIcon className="w-[20px] h-[20px]" />
-              <p className='text-sm'>{item.category}</p>
+              <p className="text-sm">{item.category}</p>
             </div>
             <div className="flex items-center gap-2 mb-6">
               <ClockIcon className="w-[20px] h-[20px]" />
-              <p className='text-sm'>Updated at {item.updatedAt}</p>
+              <p className="text-sm">Updated at {item.updatedAt}</p>
             </div>
             <div className="flex items-center justify-between">
-             <button className='flex gap-[10px] items-center justify-center rounded-sm border border-[#FA2C5A] w-[128px] h-12 text-sm font-bold text-[#FA2C5A]'><TrashIcon className='w-[18px] h-[18px] text-[#FA2C5A]'/> Delete</button>
-             <button className='flex gap-[10px] items-center justify-center rounded-sm bg-[#5CB85F] w-[128px] h-12 text-sm font-bold text-[#fff]'><PencilSquareIcon className='w-[18px] h-[18px] text-[#fff]'/>Edit</button>
+              <button onClick={() => handleModal(item.name, item.id)} className="flex gap-[10px] items-center justify-center rounded-sm border border-[#FA2C5A] w-[128px] h-12 text-sm font-bold text-[#FA2C5A]">
+                <TrashIcon className="w-[18px] h-[18px] text-[#FA2C5A]" /> Delete
+              </button>
+              <button className="flex gap-[10px] items-center justify-center rounded-sm bg-[#5CB85F] w-[128px] h-12 text-sm font-bold text-[#fff]">
+                <PencilSquareIcon className="w-[18px] h-[18px] text-[#fff]" />
+                Edit
+              </button>
             </div>
           </div>
         ))}
