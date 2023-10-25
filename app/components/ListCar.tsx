@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ChevronRightIcon, UsersIcon, ClockIcon, TrashIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 import axios from 'axios';
 import Modal from './Modal';
+import Toast from './Toast';
 
 interface CarsData {
   id: number;
@@ -22,6 +23,7 @@ function ListCar() {
   const [isShown, setIsShown] = useState(false);
   const [name, setName] = useState('');
   const [modalId, setModalId] = useState(0);
+  const [showToast, setShowToast] = useState(false)
 
   const getData = async () => {
     const res = await axios.get(`https://api-car-rental.binaracademy.org/admin/v2/car`, {
@@ -41,28 +43,36 @@ function ListCar() {
   const handleModal = (name: string, id: number) => {
     setIsShown(true);
     setName(name);
-    setModalId(id)
+    setModalId(id);
   };
 
   const handleCancel = () => {
     setIsShown(false);
   };
 
-  const handleDelete = async(id: number) => {
+  const handleDelete = async (id: number) => {
     const res = await axios.delete(`https://api-car-rental.binaracademy.org/admin/car/${id}`, {
       headers: {
         access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGJjci5pbyIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY2NTI0MjUwOX0.ZTx8L1MqJ4Az8KzoeYU2S614EQPnqk6Owv03PUSnkzc',
       },
     });
     setIsShown(false);
-    location.reload()
-    console.log(res)
+    setShowToast(true)
+    console.log(res);
   };
+
+  // Toast
+  const handleToast = () => {
+    setShowToast(false)
+    location.reload()
+  }
 
   return (
     <div className="pt-[102px] pl-[245px] pr-[25px]">
-      {isShown && <Modal name={name} cancel={handleCancel} id={modalId} del={handleDelete}/>}
+      {isShown && <Modal name={name} cancel={handleCancel} id={modalId} del={handleDelete} />}
+      {showToast && <Toast name={name} ok={handleToast}/>}
       {isShown && <div className="fixed top-0 left-0 right-0 bottom-0 z-10 bg-black bg-opacity-60"></div>}
+      {showToast && <div className="fixed top-0 left-0 right-0 bottom-0 z-10 bg-black bg-opacity-60"></div>}
       <div className="flex gap-1 items-center mb-[27px]">
         <h1 className="text-xs font-bold">Cars</h1>
         <ChevronRightIcon className="w-4 h-4" />
@@ -80,10 +90,10 @@ function ListCar() {
         <button className="border border-[#AEB7E1] py-2 px-3 rounded-sm text-[#AEB7E1] text-sm font-bold">4 - 6 people</button>
         <button className="border border-[#AEB7E1] py-2 px-3 rounded-sm text-[#AEB7E1] text-sm font-bold">6 - 8 people</button>
       </div>
-      <div className="flex flex-wrap gap-6 justify-center items-center">
+      <div className="flex flex-wrap gap-10 justify-center items-center">
         {data.map((item) => (
-          <div className="w-[315px] h-[460px] p-6 bg-[#fff]">
-            <img src={item.image} alt="car" className="mb-[47px] h-[150px] w-full" />
+          <div className="w-[351px] h-[482px] p-6 bg-[#fff]">
+            <img src={item.image} alt="car" className="mb-[47px] h-[190px] w-full" />
             <p className="text-sm mb-2">{item.name}</p>
             <p className="text-base font-bold mb-4">Rp. {item.price} / hari</p>
             <div className="flex items-center gap-2 mb-4">
@@ -95,10 +105,10 @@ function ListCar() {
               <p className="text-sm">Updated at {item.updatedAt}</p>
             </div>
             <div className="flex items-center justify-between">
-              <button onClick={() => handleModal(item.name, item.id)} className="flex gap-[10px] items-center justify-center rounded-sm border border-[#FA2C5A] w-[128px] h-12 text-sm font-bold text-[#FA2C5A]">
+              <button onClick={() => handleModal(item.name, item.id)} className="flex gap-[10px] items-center justify-center rounded-sm border border-[#FA2C5A] w-[143.5px] h-12 text-sm font-bold text-[#FA2C5A]">
                 <TrashIcon className="w-[18px] h-[18px] text-[#FA2C5A]" /> Delete
               </button>
-              <button className="flex gap-[10px] items-center justify-center rounded-sm bg-[#5CB85F] w-[128px] h-12 text-sm font-bold text-[#fff]">
+              <button className="flex gap-[10px] items-center justify-center rounded-sm bg-[#5CB85F] w-[143.5px] h-12 text-sm font-bold text-[#fff]">
                 <PencilSquareIcon className="w-[18px] h-[18px] text-[#fff]" />
                 Edit
               </button>
