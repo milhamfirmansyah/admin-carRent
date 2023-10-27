@@ -5,7 +5,6 @@ import Link from 'next/link';
 import axios from 'axios';
 
 function AddCar() {
-
   return (
     <div className="pt-[102px] pl-[245px] pr-[25px]">
       <div className="flex items-center gap-1 mb-[27px]">
@@ -22,24 +21,14 @@ function AddCar() {
           <label htmlFor="" className="w-[147px] text-xs font-normal">
             Nama/Tipe Mobil<span className="text-[#FA2C5A]">*</span>
           </label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Input Nama/Tipe Mobil"
-            className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none placeholder:text-xs placeholder:font-light placeholder:text-[#8A8A8A]"
-          />
+          <input type="text" name="name" placeholder="Input Nama/Tipe Mobil" className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none placeholder:text-xs placeholder:font-light placeholder:text-[#8A8A8A]" />
         </div>
         {/* Harga Mobil */}
         <div className="flex items-center gap-2 mb-4">
           <label htmlFor="" className="w-[147px] text-xs font-normal">
             Harga<span className="text-[#FA2C5A]">*</span>
           </label>
-          <input
-            type="text"
-            name="price"
-            placeholder="Input Harga Sewa Mobil"
-            className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none placeholder:text-xs placeholder:font-light placeholder:text-[#8A8A8A]"
-          />
+          <input type="text" name="price" placeholder="Input Harga Sewa Mobil" className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none placeholder:text-xs placeholder:font-light placeholder:text-[#8A8A8A]" />
         </div>
         {/* Foto Mobil */}
         <div className="flex items-center gap-2 mb-4">
@@ -61,12 +50,12 @@ function AddCar() {
           <label htmlFor="" className="w-[147px] text-xs font-normal">
             Kategori<span className="text-[#FA2C5A]">*</span>
           </label>
-          <input
-            type="text"
-            name="category"
-            placeholder="Pilih Kategori Mobil"
-            className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none placeholder:text-xs placeholder:font-light placeholder:text-[#8A8A8A]"
-          />
+          <select className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none">
+            <option value="">Pilih Kategori Mobil</option>
+            <option value="small">small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
         </div>
         {/* Created at */}
         <div className="flex items-center gap-2 mb-4">
@@ -87,9 +76,7 @@ function AddCar() {
         <Link href={'/cars'}>
           <button className="w-[70px] h-9 border rounded-sm border-[#0D28A6] text-[#0D28A6] text-sm font-bold">Cancel</button>
         </Link>
-        <button className="w-[57px] h-9 bg-[#0D28A6] rounded-sm text-[#fff] text-sm font-bold">
-          Save
-        </button>
+        <button className="w-[57px] h-9 bg-[#0D28A6] rounded-sm text-[#fff] text-sm font-bold">Save</button>
       </div>
     </div>
   );
