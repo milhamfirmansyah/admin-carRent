@@ -4,6 +4,7 @@ import { ChevronRightIcon, UsersIcon, ClockIcon, TrashIcon, PencilSquareIcon } f
 import axios from 'axios';
 import Modal from './Modal';
 import Toast from './Toast';
+import Link from 'next/link';
 
 interface CarsData {
   id: number;
@@ -23,7 +24,7 @@ function ListCar() {
   const [isShown, setIsShown] = useState(false);
   const [name, setName] = useState('');
   const [modalId, setModalId] = useState(0);
-  const [showToast, setShowToast] = useState(false)
+  const [showToast, setShowToast] = useState(false);
 
   const getData = async () => {
     const res = await axios.get(`https://api-car-rental.binaracademy.org/admin/v2/car`, {
@@ -57,20 +58,20 @@ function ListCar() {
       },
     });
     setIsShown(false);
-    setShowToast(true)
+    setShowToast(true);
     console.log(res);
   };
 
   // Toast
   const handleToast = () => {
-    setShowToast(false)
-    location.reload()
-  }
+    setShowToast(false);
+    location.reload();
+  };
 
   return (
     <div className="pt-[102px] pl-[245px] pr-[25px]">
       {isShown && <Modal name={name} cancel={handleCancel} id={modalId} del={handleDelete} />}
-      {showToast && <Toast name={name} ok={handleToast}/>}
+      {showToast && <Toast name={name} ok={handleToast} />}
       {isShown && <div className="fixed top-0 left-0 right-0 bottom-0 z-10 bg-black bg-opacity-60"></div>}
       {showToast && <div className="fixed top-0 left-0 right-0 bottom-0 z-10 bg-black bg-opacity-60"></div>}
       <div className="flex gap-1 items-center mb-[27px]">
@@ -80,9 +81,11 @@ function ListCar() {
       </div>
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-bold">List Car</h2>
-        <button className="bg-[#0D28A6] py-2 px-3 rounded-sm text-[#FFFFFF] text-sm font-bold flex items-center">
-          <span className="text-[18px] mr-3">+</span>Add New Car
-        </button>
+        <Link href={'/add-new-car'}>
+          <button className="bg-[#0D28A6] py-2 px-3 rounded-sm text-[#FFFFFF] text-sm font-bold flex items-center">
+            <span className="text-[18px] mr-3">+</span>Add New Car
+          </button>
+        </Link>
       </div>
       <div className="flex items-center gap-4 mb-6">
         <button className="border border-[#AEB7E1] py-2 px-3 rounded-sm text-[#AEB7E1] text-sm font-bold">All</button>
@@ -92,7 +95,7 @@ function ListCar() {
       </div>
       <div className="flex flex-wrap gap-10 justify-center items-center">
         {data.map((item) => (
-          <div className="w-[351px] h-[482px] p-6 bg-[#fff]">
+          <div className="w-[351px] h-[482px] p-6 bg-[#fff] rounded-lg">
             <img src={item.image} alt="car" className="mb-[47px] h-[190px] w-full" />
             <p className="text-sm mb-2">{item.name}</p>
             <p className="text-base font-bold mb-4">Rp. {item.price} / hari</p>
