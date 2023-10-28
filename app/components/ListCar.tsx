@@ -38,7 +38,7 @@ function ListCar() {
   useEffect(() => {
     getData();
   }, []);
-  // console.log(data);
+  console.log(data);
 
   // Delete Car
   const handleModal = (name: string, id: number) => {
@@ -59,7 +59,7 @@ function ListCar() {
     });
     setIsShown(false);
     setShowToast(true);
-    console.log(res);
+    // console.log(res);
   };
 
   // Toast

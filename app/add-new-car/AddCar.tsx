@@ -1,10 +1,51 @@
 'use client';
-import React, { SyntheticEvent, useState } from 'react';
+import React, { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import axios from 'axios';
 
 function AddCar() {
+
+  const [form, setForm] = useState({
+    name: '',
+    price: '',
+    category: ''
+  })
+  const [image, setImage] = useState<any>()
+
+  const handleInputChange = (e: any ) => {
+    const {name, value} = e.target
+    setForm({...form, [name]: value})
+  }
+
+  const handleImageChange = (e: any) => {
+    setImage(e.target.files[0])
+  }
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault
+
+    const formData = new FormData()
+    formData.append('name', form.name)
+    formData.append('price', form.price)
+    formData.append('category', form.category)
+    formData.append('image', image)
+
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGJjci5pbyIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY2NTI0MjUwOX0.ZTx8L1MqJ4Az8KzoeYU2S614EQPnqk6Owv03PUSnkzc'
+      }
+    }
+
+    try {
+      const res = await axios.post('https://api-car-rental.binaracademy.org/admin/car', formData, config)
+      console.log('Berhasil Post', res)
+    } catch (error) {
+      console.log('Gagal Post', error)
+    }
+  }
+
   return (
     <div className="pt-[102px] pl-[245px] pr-[25px]">
       <div className="flex items-center gap-1 mb-[27px]">
@@ -21,14 +62,28 @@ function AddCar() {
           <label htmlFor="" className="w-[147px] text-xs font-normal">
             Nama/Tipe Mobil<span className="text-[#FA2C5A]">*</span>
           </label>
-          <input type="text" name="name" placeholder="Input Nama/Tipe Mobil" className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none placeholder:text-xs placeholder:font-light placeholder:text-[#8A8A8A]" />
+          <input
+            type="text"
+            name='name'
+            value={form.name}
+            onChange={handleInputChange}
+            placeholder="Input Nama/Tipe Mobil"
+            className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none placeholder:text-xs placeholder:font-light placeholder:text-[#8A8A8A]"
+          />
         </div>
         {/* Harga Mobil */}
         <div className="flex items-center gap-2 mb-4">
           <label htmlFor="" className="w-[147px] text-xs font-normal">
             Harga<span className="text-[#FA2C5A]">*</span>
           </label>
-          <input type="text" name="price" placeholder="Input Harga Sewa Mobil" className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none placeholder:text-xs placeholder:font-light placeholder:text-[#8A8A8A]" />
+          <input
+            type="text"
+            name='price'
+            value={form.price}
+            onChange={handleInputChange}
+            placeholder="Input Harga Sewa Mobil"
+            className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none placeholder:text-xs placeholder:font-light placeholder:text-[#8A8A8A]"
+          />
         </div>
         {/* Foto Mobil */}
         <div className="flex items-center gap-2 mb-4">
@@ -38,6 +93,7 @@ function AddCar() {
           <div>
             <input
               type="file"
+              onChange={handleImageChange}
               placeholder="Upload Foto Mobil"
               accept=".jpg, .jpeg, .png"
               className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none placeholder:text-xs placeholder:font-light placeholder:text-[#8A8A8A] mb-1"
@@ -50,7 +106,7 @@ function AddCar() {
           <label htmlFor="" className="w-[147px] text-xs font-normal">
             Kategori<span className="text-[#FA2C5A]">*</span>
           </label>
-          <select className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none">
+          <select name='category' value={form.category} onChange={handleInputChange} className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none">
             <option value="">Pilih Kategori Mobil</option>
             <option value="small">small</option>
             <option value="medium">Medium</option>
@@ -76,7 +132,7 @@ function AddCar() {
         <Link href={'/cars'}>
           <button className="w-[70px] h-9 border rounded-sm border-[#0D28A6] text-[#0D28A6] text-sm font-bold">Cancel</button>
         </Link>
-        <button className="w-[57px] h-9 bg-[#0D28A6] rounded-sm text-[#fff] text-sm font-bold">Save</button>
+        <button onClick={handleSubmit} className="w-[57px] h-9 bg-[#0D28A6] rounded-sm text-[#fff] text-sm font-bold">Save</button>
       </div>
     </div>
   );
