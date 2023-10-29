@@ -12,7 +12,7 @@ interface ModalProps {
 
 function Modal({ name, cancel, id, del}: ModalProps) {
   return (
-    <div className="flex flex-col items-center w-[387px] h-[343px] fixed top-[22%] left-[35%] bg-[#fff] z-20 p-8">
+    <div className="flex flex-col items-center w-[387px] h-[343px] fixed top-[22%] left-[35%] bg-[#fff] z-20 p-8 rounded">
       <div className="mb-6">
         <Image src={hiasanmobil} alt="hiasanmobil" width={153} />
         <Image src={mobilmodal} alt="mobilmodal" width={153} className="mt-[-27px]" />

@@ -10,7 +10,7 @@ interface ModalProps {
 
 function ToastAddCar({ succ}: ModalProps) {
   return (
-    <div className="flex flex-col items-center w-[387px] h-[343px] fixed top-[22%] left-[35%] bg-[#fff] z-20 p-8">
+    <div className="flex flex-col items-center w-[387px] h-[343px] fixed top-[22%] left-[35%] bg-[#fff] z-20 p-8 rounded">
       <div className="mb-8">
         <Image src={hiasanmobil} alt="hiasanmobil" width={180} />
         <Image src={mobilmodal} alt="mobilmodal" width={180} className="mt-[-36px]" />
