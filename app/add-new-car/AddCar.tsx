@@ -51,14 +51,9 @@ function AddCar() {
     }
   };
 
-  // Toast
-  const handleOkeToast = () => {
-    location.reload();
-  };
-
   return (
     <div className="pt-[102px] pl-[245px] pr-[25px]">
-      {succ && <ToastAddCar succ={succ} ok={handleOkeToast}/>}
+      {succ && <ToastAddCar succ={succ}/>}
       {succ && <div className="fixed top-0 left-0 right-0 bottom-0 z-10 bg-black bg-opacity-60"></div>}
       <div className="flex items-center gap-1 mb-[27px]">
         <h1 className="text-xs font-bold">Cars</h1>

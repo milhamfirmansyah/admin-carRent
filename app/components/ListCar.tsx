@@ -111,10 +111,12 @@ function ListCar() {
               <button onClick={() => handleModal(item.name, item.id)} className="flex gap-[10px] items-center justify-center rounded-sm border border-[#FA2C5A] w-[143.5px] h-12 text-sm font-bold text-[#FA2C5A]">
                 <TrashIcon className="w-[18px] h-[18px] text-[#FA2C5A]" /> Delete
               </button>
-              <button className="flex gap-[10px] items-center justify-center rounded-sm bg-[#5CB85F] w-[143.5px] h-12 text-sm font-bold text-[#fff]">
-                <PencilSquareIcon className="w-[18px] h-[18px] text-[#fff]" />
-                Edit
-              </button>
+              <Link href={`/edit/${item.id}`}>
+                <button className="flex gap-[10px] items-center justify-center rounded-sm bg-[#5CB85F] w-[143.5px] h-12 text-sm font-bold text-[#fff]">
+                  <PencilSquareIcon className="w-[18px] h-[18px] text-[#fff]" />
+                  Edit
+                </button>
+              </Link>
             </div>
           </div>
         ))}

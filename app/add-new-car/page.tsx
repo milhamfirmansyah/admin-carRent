@@ -10,7 +10,7 @@ function page() {
     <div>
       <Navbar />
       <Sidebar />
-      <SidebarRight header="Cars" content="Cars" />
+      <SidebarRight header="Cars" content="List Car" />
       <AddCar/>
     </div>
   );

@@ -9,7 +9,7 @@ function Cars() {
     <div>
       <Navbar />
       <Sidebar />
-      <SidebarRight header="Cars" content="Cars" />
+      <SidebarRight header="Cars" content="List Car" />
       <ListCar />
     </div>
   );
