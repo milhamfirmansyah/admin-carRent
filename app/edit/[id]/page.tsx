@@ -28,7 +28,7 @@ const EditById = ({ params }: { params: { id: number } }) => {
   useEffect(() => {
     getData();
   }, []);
-  console.log(data);
+  // console.log(data);
 
   // Edit Data
   const [form, setForm] = useState({
@@ -65,14 +65,17 @@ const EditById = ({ params }: { params: { id: number } }) => {
       },
     };
 
+    setLoad(true);
     try {
-      setLoad(true);
       const res = await axios.put(`https://api-car-rental.binaracademy.org/admin/car/${params.id}`, formData, config);
       console.log('Berhasil Edit', res);
-      setSucc('Data Berhasil Diubah! Kembali ke Cars');
       setLoad(false);
+      if (res.status === 200) {
+        setSucc('Data Berhasil Diubah! Kembali ke Cars');
+      }
     } catch (error) {
       console.log('Gagal Edit', error);
+      setLoad(false);
     }
   };
 
