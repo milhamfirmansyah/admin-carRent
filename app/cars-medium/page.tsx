@@ -2,15 +2,15 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import SidebarRight from '../components/SidebarRight';
-import ListCar from '../components/ListCar';
+import ListCarMedium from '../components/ListCarMedium';
 
-function Cars() {
+function Cars(req: any) {
   return (
     <div>
       <Navbar />
       <Sidebar />
       <SidebarRight header="Cars" content="List Car" />
-      <ListCar />
+      <ListCarMedium />
     </div>
   );
 }

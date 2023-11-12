@@ -19,30 +19,26 @@ interface CarsData {
   updatedAt: string;
 }
 
-function ListCar() {
+function ListCarMedium() {
   const [data, setData] = useState<CarsData[]>([]);
   const [isShown, setIsShown] = useState(false);
   const [name, setName] = useState('');
   const [modalId, setModalId] = useState(0);
   const [showToast, setShowToast] = useState(false);
 
+  const getData = async () => {
+    const res = await axios.get(`https://api-car-rental.binaracademy.org/admin/v2/car?category=medium`, {
+      headers: {
+        access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGJjci5pbyIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY2NTI0MjUwOX0.ZTx8L1MqJ4Az8KzoeYU2S614EQPnqk6Owv03PUSnkzc',
+      },
+    });
+    setData(res.data.cars);
+  };
+
   useEffect(() => {
-    if (typeof window !== undefined) {
-      const token = localStorage.getItem('tokenAdmin');
-      // console.log(token);
-
-      const getData = async () => {
-        const res = await axios.get(`https://api-car-rental.binaracademy.org/admin/v2/car`, {
-          headers: {
-            access_token: token,
-          },
-        });
-        setData(res.data.cars);
-      };
-
-      getData();
-    }
+    getData();
   }, []);
+  console.log(data);
 
   // Delete Car
   const handleModal = (name: string, id: number) => {
@@ -91,13 +87,13 @@ function ListCar() {
         </Link>
       </div>
       <div className="flex items-center gap-4 mb-6">
-        <button className="border border-[#0D28A6] py-2 px-3 rounded-sm text-[#0D28A6] text-sm font-bold bg-[#CFD4ED]">All</button>
+        <Link href={'/cars-all'}>
+          <button className="border border-[#AEB7E1] py-2 px-3 rounded-sm text-[#AEB7E1] text-sm font-bold">All</button>
+        </Link>
         <Link href={'/cars-small'}>
           <button className="border border-[#AEB7E1] py-2 px-3 rounded-sm text-[#AEB7E1] text-sm font-bold">2 - 4 people</button>
         </Link>
-        <Link href={'/cars-medium'}>
-          <button className="border border-[#AEB7E1] py-2 px-3 rounded-sm text-[#AEB7E1] text-sm font-bold">4 - 6 people</button>
-        </Link>
+        <button className="border border-[#0D28A6] py-2 px-3 rounded-sm text-[#0D28A6] text-sm font-bold bg-[#CFD4ED]">4 - 6 people</button>
         <Link href={'/cars-large'}>
           <button className="border border-[#AEB7E1] py-2 px-3 rounded-sm text-[#AEB7E1] text-sm font-bold">6 - 8 people</button>
         </Link>
@@ -134,4 +130,4 @@ function ListCar() {
   );
 }
 
-export default ListCar;
+export default ListCarMedium;

@@ -16,7 +16,7 @@ function ToastAddCar({ succ}: ModalProps) {
         <Image src={mobilmodal} alt="mobilmodal" width={180} className="mt-[-36px]" />
       </div>
       <h1 className="text-xl font-bold mb-6 text-center">{succ}</h1>
-      <Link href={'/cars'}>
+      <Link href={'/cars-all'}>
         <button className="w-[87px] h-9 bg-[#0D28A6] rounded-sm text-sm text-[#fff] font-bold">
           Oke
         </button>

@@ -1,17 +1,14 @@
 'use client';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { MagnifyingGlassIcon, ChevronDownIcon } from '@heroicons/react/24/solid';
 
 function Navbar() {
   const [role, setRole] = useState('');
 
   useEffect(() => {
-    // Cek apakah localStorage tersedia (hanya dijalankan pada sisi klien)
-    if (typeof window !== 'undefined') {
-      const role = localStorage.getItem('roleAdmin');
-      if (role) {
-        setRole(role);
-      }
+    if (typeof window !== undefined) {
+      const roleAdmin: any = localStorage.getItem('roleAdmin');
+      setRole(roleAdmin);
     }
   }, []);
 
@@ -27,7 +24,7 @@ function Navbar() {
           <button className="border w-[61px] h-[36px] text-sm font-bold text-[#0D28A6] rounded-sm border border-[#0D28A6]">Search</button>
         </div>
         <div className="flex gap-2 items-center">
-          <div className="w-[38px] h-[38px] rounded-full bg-[#CFD4ED] flex justify-center items-center text-[#151515] text-base font-bold">{role?.charAt(0)}</div>
+          <div className="w-[38px] h-[38px] rounded-full bg-[#CFD4ED] flex justify-center items-center text-[#151515] text-base font-bold">{role.charAt(0)}</div>
           <p className="text-[#151515] text-sm">{role}</p>
           <ChevronDownIcon className="w-5 h-5 text-[#151515]" />
         </div>

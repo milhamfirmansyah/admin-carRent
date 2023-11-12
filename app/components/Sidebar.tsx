@@ -14,7 +14,7 @@ function Sidebar() {
         <HomeIcon className="h-[24px] w-[24px] text-[#FFFFFF]" />
         <p className="text-[#FFF] text-[12px] font-bold leading-[18px]">Dashboard</p>
       </Link>
-      <Link href={'/cars'} className={`flex flex-col items-center py-[20px] cursor-pointer ${pathname === '/cars' && 'bg-[#FFF] bg-opacity-30'} w-full`}>
+      <Link href={'/cars-all'} className={`flex flex-col items-center py-[20px] cursor-pointer ${pathname === '/cars-all' && 'bg-[#FFF] bg-opacity-30'} w-full`}>
         <TruckIcon className="h-[24px] w-[24px] text-[#FFFFFF]" />
         <p className="text-[#FFF] text-[12px] font-bold leading-[18px]">Cars</p>
       </Link>
