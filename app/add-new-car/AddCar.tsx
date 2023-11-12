@@ -78,7 +78,7 @@ function AddCar() {
             value={form.name}
             onChange={handleInputChange}
             placeholder="Input Nama/Tipe Mobil"
-            className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none placeholder:text-xs placeholder:font-light placeholder:text-[#8A8A8A]"
+            className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none text-sm placeholder:text-xs placeholder:font-light placeholder:text-[#8A8A8A]"
           />
         </div>
         {/* Harga Mobil */}
@@ -92,7 +92,7 @@ function AddCar() {
             value={form.price}
             onChange={handleInputChange}
             placeholder="Input Harga Sewa Mobil"
-            className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none placeholder:text-xs placeholder:font-light placeholder:text-[#8A8A8A]"
+            className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none text-sm placeholder:text-xs placeholder:font-light placeholder:text-[#8A8A8A]"
           />
         </div>
         {/* Foto Mobil */}
@@ -106,7 +106,7 @@ function AddCar() {
               onChange={handleImageChange}
               placeholder="Upload Foto Mobil"
               accept=".jpg, .jpeg, .png"
-              className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none placeholder:text-xs placeholder:font-light placeholder:text-[#8A8A8A] mb-1"
+              className="text-sm border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none placeholder:text-xs placeholder:font-light placeholder:text-[#8A8A8A] mb-1"
             />
             <p className="text-[10px] leading-[14px] font-light text-[#8A8A8A]">File size max. 2MB</p>
           </div>
@@ -116,7 +116,7 @@ function AddCar() {
           <label htmlFor="" className="w-[147px] text-xs font-normal">
             Kategori<span className="text-[#FA2C5A]">*</span>
           </label>
-          <select name="category" value={form.category} onChange={handleInputChange} className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none">
+          <select name="category" value={form.category} onChange={handleInputChange} className="border border-[#D0D0D0] w-[339px] h-9 rounded-sm py-[9] px-3 outline-none text-sm">
             <option value="">Pilih Kategori Mobil</option>
             <option value="small">small</option>
             <option value="medium">Medium</option>
@@ -139,7 +139,7 @@ function AddCar() {
         </div>
       </div>
       <div className="flex items-center gap-4">
-        <Link href={'/cars'}>
+        <Link href={'/cars-all'}>
           <button className="w-[70px] h-9 border rounded-sm border-[#0D28A6] text-[#0D28A6] text-sm font-bold">Cancel</button>
         </Link>
         <button onClick={handleSubmit} disabled={load ? true : false} className="w-[57px] h-9 bg-[#0D28A6] rounded-sm text-[#fff] text-sm font-bold">
