@@ -7,7 +7,6 @@ import ListCarSmall from '../components/ListCarSmall';
 function Cars(req: any) {
   return (
     <div>
-      <Navbar />
       <Sidebar />
       <SidebarRight header="Cars" content="List Car" />
       <ListCarSmall />
