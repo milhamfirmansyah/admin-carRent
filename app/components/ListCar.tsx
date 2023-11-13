@@ -26,23 +26,18 @@ function ListCar() {
   const [modalId, setModalId] = useState(0);
   const [showToast, setShowToast] = useState(false);
 
-  useEffect(() => {
-    if (typeof window !== undefined) {
-      const token = localStorage.getItem('tokenAdmin');
-      // console.log(token);
+  const getData = async () => {
+    const res = await axios.get(`https://api-car-rental.binaracademy.org/admin/v2/car`, {
+      headers: {
+        access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGJjci5pbyIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY2NTI0MjUwOX0.ZTx8L1MqJ4Az8KzoeYU2S614EQPnqk6Owv03PUSnkzc',
+      },
+    });
+    setData(res.data.cars);
+  };
 
-      const getData = async () => {
-        const res = await axios.get(`https://api-car-rental.binaracademy.org/admin/v2/car`, {
-          headers: {
-            access_token: token,
-          },
-        });
-        setData(res.data.cars);
-      };
-
-      getData();
-    }
-  }, []);
+  useEffect(()=>{
+    getData()
+  },[])
 
   // Delete Car
   const handleModal = (name: string, id: number) => {
